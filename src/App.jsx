@@ -6,6 +6,14 @@ const LANGUAGES = [
   { code: "spagnolo", label: "🇪🇸 Spagnolo" },
 ];
 
+const ESEMPIO_EN = `With size US 8/5mm needles, cast on 78 (90: 98: 106) sts.
+Row 1 (RS) K2, *p2, k2; rep from * to end.
+Row 2 (WS) K the knit and p the purl sts.`;
+
+const ESEMPIO_IT = `Con i ferri da 5mm, avviare 78 (90: 98: 106) m.
+Ferro 1 (DL) 2dir, *2rov, 2dir; rip da * fino alla fine.
+Ferro 2 (RL) Lavorare a dir le m a dir e a rov le m a rov.`;
+
 export default function App() {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
@@ -33,6 +41,17 @@ export default function App() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const vediEsempio = () => {
+    setInput(ESEMPIO_EN);
+    setOutput("");
+    setError("");
+    setLoading(true);
+    setTimeout(() => {
+      setOutput(ESEMPIO_IT);
+      setLoading(false);
+    }, 600);
   };
 
   const copyToClipboard = () => {
@@ -69,6 +88,9 @@ export default function App() {
               </button>
             ))}
           </div>
+          <button onClick={vediEsempio} className="example-link">
+            Guarda una traduzione di esempio →
+          </button>
         </div>
         <div className="grid-container">
           <div className="input-box">

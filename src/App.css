@@ -250,3 +250,20 @@
     display: none;
   }
 }
+
+.example-link {
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #6366f1;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s;
+  letter-spacing: 0.02em;
+}
+
+.example-link:hover {
+  color: #4338ca;
+  text-decoration: underline;
+}
