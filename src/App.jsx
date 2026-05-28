@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./App.css";
 
 const LANGUAGES = [
   { code: "italiano", label: "🇮🇹 Italiano" },
@@ -41,70 +42,87 @@ export default function App() {
   };
 
   return (
-    <div style={{ minHeight: "100vh", background: "#faf8f5", fontFamily: "'Georgia', serif", color: "#2a2218" }}>
-      <header style={{ padding: "20px 40px", background: "#2a2218", display: "flex", alignItems: "center", gap: "12px" }}>
-        <span style={{ fontSize: "24px" }}>🧶</span>
-        <h1 style={{ margin: 0, fontSize: "19px", fontWeight: "700", color: "#faf8f5", letterSpacing: "0.04em" }}>KnitTranslate</h1>
-        <span style={{ fontSize: "10px", background: "#c8a96e", color: "#2a2218", padding: "2px 8px", borderRadius: "2px", fontFamily: "monospace", fontWeight: "700" }}>AI BETA</span>
-        <span style={{ marginLeft: "auto", fontSize: "11px", color: "#a89880", fontStyle: "italic" }}>Traduzione professionale di pattern di maglia ai ferri</span>
+    <div className="app-container">
+      <header className="header">
+        <div className="header-content">
+          <div className="brand">
+            <span className="logo-icon">🧶</span>
+            <h1>KnitTranslate</h1>
+            <span className="badge">AI Beta</span>
+          </div>
+          <div className="subtitle">
+            Traduzione professionale di pattern di maglia
+          </div>
+        </div>
       </header>
-
-      <main style={{ maxWidth: "1140px", margin: "0 auto", padding: "32px 40px" }}>
-        <div style={{ marginBottom: "20px" }}>
-          <p style={{ margin: "0 0 8px", fontSize: "11px", letterSpacing: "0.1em", textTransform: "uppercase", color: "#7a6e62", fontFamily: "monospace" }}>Lingua di destinazione</p>
-          <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+      <main className="main-content">
+        <div className="lang-section">
+          <span className="section-label">Lingua di destinazione</span>
+          <div className="lang-pills">
             {LANGUAGES.map((lang) => (
-              <button key={lang.code} onClick={() => setSelectedLang(lang.code)} style={{
-                padding: "6px 14px", border: selectedLang === lang.code ? "2px solid #2a2218" : "2px solid #d4cdc4",
-                background: selectedLang === lang.code ? "#2a2218" : "transparent",
-                color: selectedLang === lang.code ? "#faf8f5" : "#2a2218",
-                borderRadius: "2px", cursor: "pointer", fontSize: "13px", fontFamily: "'Georgia', serif",
-              }}>{lang.label}</button>
+              <button
+                key={lang.code}
+                onClick={() => setSelectedLang(lang.code)}
+                className={`lang-btn ${selectedLang === lang.code ? 'active' : ''}`}
+              >
+                {lang.label}
+              </button>
             ))}
           </div>
         </div>
-
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px", marginBottom: "20px" }}>
-          <div>
-            <p style={{ margin: "0 0 8px", fontSize: "11px", letterSpacing: "0.1em", textTransform: "uppercase", color: "#7a6e62", fontFamily: "monospace" }}>Pattern originale (EN)</p>
-            <textarea value={input} onChange={(e) => setInput(e.target.value)}
-              placeholder={"Back\nWith size US 8/5mm needles, cast on 78 sts..."}
-              style={{ width: "100%", height: "460px", border: "2px solid #d4cdc4", borderRadius: "2px", padding: "18px", fontSize: "12.5px", lineHeight: "1.75", fontFamily: "'Courier New', monospace", background: "#fff", color: "#2a2218", resize: "vertical", boxSizing: "border-box", outline: "none" }}
+        <div className="grid-container">
+          <div className="input-box">
+            <div className="box-header">
+              <label className="section-label" style={{ marginBottom: 0 }}>Pattern Originale (EN)</label>
+            </div>
+            <textarea
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="Incolla qui il testo del pattern in inglese..."
+              className="custom-textarea"
             />
           </div>
-          <div>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "8px" }}>
-              <p style={{ margin: 0, fontSize: "11px", letterSpacing: "0.1em", textTransform: "uppercase", color: "#7a6e62", fontFamily: "monospace" }}>Traduzione</p>
-              {output && <button onClick={copyToClipboard} style={{ border: "none", background: "none", cursor: "pointer", fontSize: "11px", color: copied ? "#5a8a5a" : "#7a6e62", fontFamily: "monospace" }}>{copied ? "✓ Copiato" : "Copia testo"}</button>}
+          <div className="output-box">
+            <div className="box-header">
+              <label className="section-label" style={{ marginBottom: 0 }}>Traduzione</label>
+              {output && (
+                <button onClick={copyToClipboard} className="copy-btn">
+                  {copied ? "✓ Copiato!" : "Copia testo"}
+                </button>
+              )}
             </div>
-            <div style={{ width: "100%", height: "460px", border: "2px solid #d4cdc4", borderRadius: "2px", padding: "18px", fontSize: "12.5px", lineHeight: "1.75", fontFamily: "'Courier New', monospace", background: loading ? "#f5f3f0" : "#fffdf9", color: "#2a2218", overflowY: "auto", boxSizing: "border-box", whiteSpace: "pre-wrap" }}>
-              {loading ? (
-                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "100%", gap: "12px", color: "#7a6e62" }}>
-                  <span style={{ fontSize: "28px", display: "inline-block", animation: "spin 2s linear infinite" }}>🧶</span>
-                  <span style={{ fontSize: "12px", fontStyle: "italic" }}>Traduzione in corso...</span>
-                </div>
-              ) : error ? <span style={{ color: "#c0392b" }}>{error}</span>
-                : output ? output
-                : <span style={{ color: "#b0a898", fontStyle: "italic", fontSize: "12px" }}>La traduzione apparirà qui...</span>}
-            </div>
+            <textarea
+              readOnly
+              value={error || output}
+              placeholder="La traduzione apparirà qui..."
+              className={`custom-textarea output-textarea ${error ? 'error-text' : ''}`}
+            />
           </div>
         </div>
-
-        <div style={{ textAlign: "center" }}>
-          <button onClick={translate} disabled={loading || !input.trim()} style={{
-            padding: "13px 44px", background: loading || !input.trim() ? "#a89880" : "#2a2218",
-            color: "#faf8f5", border: "none", borderRadius: "2px", fontSize: "14px",
-            fontFamily: "'Georgia', serif", letterSpacing: "0.06em",
-            cursor: loading || !input.trim() ? "not-allowed" : "pointer",
-          }}>
-            {loading ? "Traduzione in corso..." : "Traduci Pattern →"}
+        <div className="action-section">
+          <button
+            onClick={translate}
+            disabled={loading || !input.trim()}
+            className="translate-btn"
+          >
+            {loading ? (
+              <>
+                <svg className="spinner" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" opacity="0.25"></circle>
+                  <path fill="currentColor" opacity="0.75" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Elaborazione...
+              </>
+            ) : (
+              "Traduci Pattern →"
+            )}
           </button>
-          <p style={{ marginTop: "12px", fontSize: "11px", color: "#a89880", fontStyle: "italic" }}>
+
+          <p className="footer-note">
             Calibrato da una traduttrice professionista specializzata in pattern di maglia
           </p>
         </div>
       </main>
-      <style>{`@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } } button:hover:not(:disabled) { opacity: 0.85; }`}</style>
     </div>
   );
 }
