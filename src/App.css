@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@700;800&display=swap');
 
 .app-container {
   min-height: 100vh;
@@ -34,10 +34,11 @@
 }
 
 .brand h1 {
-  font-size: 1.5rem;
-  font-weight: 700;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 800;
   margin: 0;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.03em;
   color: #ffffff;
 }
 
@@ -133,28 +134,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1rem;
   margin-bottom: 0.5rem;
   padding: 0 0.5rem;
-}
-
-.source-pill {
-  display: flex;
-  align-items: center;
-  background-color: #eef2ff;
-  border: 1px solid #e0e7ff;
-  border-radius: 9999px;
-  padding: 0.25rem;
-}
-
-.lang-btn-static {
-  cursor: default;
-  padding: 0.35rem 1rem;
-  border-radius: 9999px;
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: #4f46e5;
-  background: transparent;
+  min-height: 40px;
 }
 
 .copy-btn {

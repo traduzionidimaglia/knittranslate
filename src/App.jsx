@@ -73,9 +73,13 @@ export default function App() {
         <div className="grid-container">
           <div className="input-box">
             <div className="box-header">
-              <label className="section-label" style={{ marginBottom: 0 }}>Pattern Originale</label>
-              <div className="source-pill">
-                <span className="lang-btn-static">🇬🇧 Inglese</span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                <label className="section-label" style={{ marginBottom: 0 }}>Pattern Originale</label>
+                <div className="lang-pills" style={{ padding: '0.15rem' }}>
+                  <span className="lang-btn active" style={{ cursor: 'default', padding: '0.25rem 0.75rem', fontSize: '0.75rem', display: 'inline-block' }}>
+                    🇬🇧 Inglese
+                  </span>
+                </div>
               </div>
             </div>
             <textarea
