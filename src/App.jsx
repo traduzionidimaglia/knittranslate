@@ -73,7 +73,10 @@ export default function App() {
         <div className="grid-container">
           <div className="input-box">
             <div className="box-header">
-              <label className="section-label" style={{ marginBottom: 0 }}>Pattern Originale (EN)</label>
+              <label className="section-label" style={{ marginBottom: 0 }}>Pattern Originale</label>
+              <div className="source-pill">
+                <span className="lang-btn-static">🇬🇧 Inglese</span>
+              </div>
             </div>
             <textarea
               value={input}
@@ -119,7 +122,7 @@ export default function App() {
           </button>
 
           <p className="footer-note">
-            Calibrato da una traduttrice professionista specializzata in pattern di maglia
+            Terminologia verificata da una traduttrice esperta di maglia — non una traduzione automatica
           </p>
         </div>
       </main>
