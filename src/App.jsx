@@ -24,6 +24,7 @@ export default function App() {
   const [password, setPassword] = useState("");
   const [authLoading, setAuthLoading] = useState(false);
   const [authError, setAuthError] = useState("");
+  const [confirmMessage, setConfirmMessage] = useState(false);
 
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
@@ -32,7 +33,6 @@ export default function App() {
   const [error, setError] = useState("");
   const [copied, setCopied] = useState(false);
   const [traduzioniUsate, setTraduzioniUsate] = useState(0);
-  const [showPaywall, setShowPaywall] = useState(false);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -79,19 +79,24 @@ export default function App() {
     }
   };
 
-  const loginGoogle = async () => {
-    setAuthLoading(true);
-    await supabase.auth.signInWithOAuth({ provider: "google" });
-    setAuthLoading(false);
-  };
-
   const loginEmail = async () => {
     setAuthLoading(true);
     setAuthError("");
-    const { error } = authMode === "login"
-      ? await supabase.auth.signInWithPassword({ email, password })
-      : await supabase.auth.signUp({ email, password });
-    if (error) setAuthError(error.message);
+    setConfirmMessage(false);
+
+    if (authMode === "login") {
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) setAuthError("Email o password errati. Riprova.");
+    } else {
+      const { error } = await supabase.auth.signUp({ email, password });
+      if (error) {
+        setAuthError(error.message);
+      } else {
+        setConfirmMessage(true);
+        setEmail("");
+        setPassword("");
+      }
+    }
     setAuthLoading(false);
   };
 
@@ -99,17 +104,13 @@ export default function App() {
     await supabase.auth.signOut();
     setTraduzioniUsate(0);
     setOutput("");
-    setShowPaywall(false);
   };
 
   const translate = async () => {
     if (!input.trim()) return;
-    if (traduzioniUsate >= LIMITE_GRATUITO) {
-      setShowPaywall(true);
-      return;
-    }
+    if (traduzioniUsate >= LIMITE_GRATUITO) return;
     setLoading(true);
-    setOutput(""); setError(""); setShowPaywall(false);
+    setOutput(""); setError("");
 
     try {
       const response = await fetch("/api/translate", {
@@ -154,18 +155,14 @@ export default function App() {
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
             {user && (
-              <span style={{ fontSize: "0.8rem", color: "#94a3b8" }}>
-                {user.email}
-              </span>
+              <span style={{ fontSize: "0.8rem", color: "#94a3b8" }}>{user.email}</span>
             )}
             {user && (
               <button onClick={logout} style={{
                 fontSize: "0.75rem", color: "#94a3b8", background: "none",
                 border: "1px solid #334155", borderRadius: "9999px",
                 padding: "0.25rem 0.75rem", cursor: "pointer"
-              }}>
-                Esci
-              </button>
+              }}>Esci</button>
             )}
             <div className="subtitle">Traduzione professionale di pattern di maglia</div>
           </div>
@@ -185,62 +182,62 @@ export default function App() {
               La prima traduzione è gratuita e completa.
             </p>
 
-            <button onClick={loginGoogle} disabled={authLoading} style={{
-              width: "100%", padding: "0.75rem", borderRadius: "0.75rem",
-              border: "1px solid #e2e8f0", background: "white", cursor: "pointer",
-              fontSize: "0.9rem", fontWeight: "500", display: "flex",
-              alignItems: "center", justifyContent: "center", gap: "0.5rem",
-              marginBottom: "1rem", transition: "all 0.2s"
-            }}>
-              <svg width="18" height="18" viewBox="0 0 18 18">
-                <path fill="#4285F4" d="M16.51 8H8.98v3h4.3c-.18 1-.74 1.48-1.6 2.04v2.01h2.6a7.8 7.8 0 0 0 2.38-5.88c0-.57-.05-.66-.15-1.18z"/>
-                <path fill="#34A853" d="M8.98 17c2.16 0 3.97-.72 5.3-1.94l-2.6-2a4.8 4.8 0 0 1-7.18-2.54H1.83v2.07A8 8 0 0 0 8.98 17z"/>
-                <path fill="#FBBC05" d="M4.5 10.52a4.8 4.8 0 0 1 0-3.04V5.41H1.83a8 8 0 0 0 0 7.18l2.67-2.07z"/>
-                <path fill="#EA4335" d="M8.98 4.18c1.17 0 2.23.4 3.06 1.2l2.3-2.3A8 8 0 0 0 1.83 5.4L4.5 7.49a4.77 4.77 0 0 1 4.48-3.3z"/>
-              </svg>
-              Continua con Google
-            </button>
+            {confirmMessage ? (
+              <div style={{
+                background: "#edf4ed", border: "1px solid #b8d4b8",
+                borderRadius: "0.75rem", padding: "1.25rem", textAlign: "center"
+              }}>
+                <p style={{ margin: "0 0 0.5rem", fontSize: "1.25rem" }}>📧</p>
+                <p style={{ margin: "0 0 0.5rem", fontWeight: "700", color: "#2d6a2d", fontSize: "0.95rem" }}>
+                  Controlla la tua email!
+                </p>
+                <p style={{ margin: 0, fontSize: "0.82rem", color: "#4a7a4a" }}>
+                  Ti abbiamo inviato un link di conferma. Clicca sul link per attivare il tuo account e iniziare a tradurre.
+                </p>
+              </div>
+            ) : (
+              <>
+                <input type="email" placeholder="Email" value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  style={{
+                    width: "100%", padding: "0.75rem", borderRadius: "0.75rem",
+                    border: "1px solid #e2e8f0", fontSize: "0.9rem", marginBottom: "0.75rem",
+                    boxSizing: "border-box", outline: "none"
+                  }}
+                />
+                <input type="password" placeholder="Password" value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && loginEmail()}
+                  style={{
+                    width: "100%", padding: "0.75rem", borderRadius: "0.75rem",
+                    border: "1px solid #e2e8f0", fontSize: "0.9rem", marginBottom: "1rem",
+                    boxSizing: "border-box", outline: "none"
+                  }}
+                />
 
-            <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "1rem" }}>
-              <div style={{ flex: 1, height: "1px", background: "#e2e8f0" }}></div>
-              <span style={{ fontSize: "0.75rem", color: "#94a3b8" }}>oppure</span>
-              <div style={{ flex: 1, height: "1px", background: "#e2e8f0" }}></div>
-            </div>
+                {authError && (
+                  <p style={{ color: "#ef4444", fontSize: "0.8rem", marginBottom: "0.75rem" }}>
+                    {authError}
+                  </p>
+                )}
 
-            <input type="email" placeholder="Email" value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              style={{
-                width: "100%", padding: "0.75rem", borderRadius: "0.75rem",
-                border: "1px solid #e2e8f0", fontSize: "0.9rem", marginBottom: "0.75rem",
-                boxSizing: "border-box", outline: "none"
-              }}
-            />
-            <input type="password" placeholder="Password" value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              style={{
-                width: "100%", padding: "0.75rem", borderRadius: "0.75rem",
-                border: "1px solid #e2e8f0", fontSize: "0.9rem", marginBottom: "1rem",
-                boxSizing: "border-box", outline: "none"
-              }}
-            />
+                <button onClick={loginEmail} disabled={authLoading} style={{
+                  width: "100%", padding: "0.75rem", borderRadius: "0.75rem",
+                  background: "#4f46e5", color: "white", border: "none",
+                  fontSize: "0.9rem", fontWeight: "600", cursor: "pointer", marginBottom: "1rem"
+                }}>
+                  {authLoading ? "..." : authMode === "login" ? "Accedi" : "Registrati"}
+                </button>
 
-            {authError && <p style={{ color: "#ef4444", fontSize: "0.8rem", marginBottom: "0.75rem" }}>{authError}</p>}
-
-            <button onClick={loginEmail} disabled={authLoading} style={{
-              width: "100%", padding: "0.75rem", borderRadius: "0.75rem",
-              background: "#4f46e5", color: "white", border: "none",
-              fontSize: "0.9rem", fontWeight: "600", cursor: "pointer", marginBottom: "1rem"
-            }}>
-              {authLoading ? "..." : authMode === "login" ? "Accedi" : "Registrati"}
-            </button>
-
-            <p style={{ textAlign: "center", fontSize: "0.8rem", color: "#64748b" }}>
-              {authMode === "login" ? "Non hai un account? " : "Hai già un account? "}
-              <button onClick={() => { setAuthMode(authMode === "login" ? "signup" : "login"); setAuthError(""); }}
-                style={{ color: "#4f46e5", background: "none", border: "none", cursor: "pointer", fontWeight: "600" }}>
-                {authMode === "login" ? "Registrati" : "Accedi"}
-              </button>
-            </p>
+                <p style={{ textAlign: "center", fontSize: "0.8rem", color: "#64748b", margin: 0 }}>
+                  {authMode === "login" ? "Non hai un account? " : "Hai già un account? "}
+                  <button onClick={() => { setAuthMode(authMode === "login" ? "signup" : "login"); setAuthError(""); setConfirmMessage(false); }}
+                    style={{ color: "#4f46e5", background: "none", border: "none", cursor: "pointer", fontWeight: "600" }}>
+                    {authMode === "login" ? "Registrati" : "Accedi"}
+                  </button>
+                </p>
+              </>
+            )}
           </div>
         ) : (
           <>
