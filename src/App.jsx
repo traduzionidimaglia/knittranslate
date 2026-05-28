@@ -2,10 +2,7 @@ import { useState } from "react";
 
 const LANGUAGES = [
   { code: "italiano", label: "🇮🇹 Italiano" },
-  { code: "tedesco", label: "🇩🇪 Tedesco" },
-  { code: "francese", label: "🇫🇷 Francese" },
   { code: "spagnolo", label: "🇪🇸 Spagnolo" },
-  { code: "olandese", label: "🇳🇱 Olandese" },
 ];
 
 export default function App() {
