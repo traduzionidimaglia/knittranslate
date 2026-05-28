@@ -163,4 +163,3 @@ Rispondi SOLO con la traduzione, senza spiegazioni o commenti.`,
   const result = data.content?.map(b => b.text || '').join('') || '';
   res.status(200).json({ translation: result });
 }
-EOF
