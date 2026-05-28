@@ -13,7 +13,7 @@ export default async function handler(req, res) {
       'x-api-key': process.env.ANTHROPIC_API_KEY,
     },
     body: JSON.stringify({
-      model: 'claude-sonnet-4-20250514',
+      model: 'claude-sonnet-4-5',
       max_tokens: 2000,
       system: `Sei KnitTranslate AI, uno strumento specializzato nella traduzione di pattern e schemi tecnici di maglia. Sei stato calibrato da una traduttrice professionista madrelingua italiana. Rispondi SOLO con la traduzione, senza spiegazioni.`,
       messages: [{ role: 'user', content: `Traduci questo pattern di maglia in ${language}. Il testo sorgente è in inglese.\n\n${text}` }],
