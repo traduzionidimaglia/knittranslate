@@ -34,6 +34,7 @@ Punti base:
 - Seed Stitch / seed st -> Motivo a Grana di Riso
 - K2 P2 Rib -> Coste 2dir, 2rov
 - rib / ribbing -> lavorazione a coste
+- DS -> maglia doppia
 
 Tecniche e punti composti:
 - kfb / KFB -> lavorare 1 maglia a diritto davanti e dietro (adattare se "lavorare" e gia presente)
@@ -51,7 +52,7 @@ Tecniche e punti composti:
 - sl1p wyif -> passare 1 m a rovescio con il filo davanti
 - yo -> gettato
 - psso -> passare la m sollevata sopra
-- m1 -> 1 aum intercalato
+- m1 -> 1 aum intercalato (m1L -> aum intercalato a sinistra, m1R -> aum intercalato a destra, MAI "sinistro/destro")
 - sk -> saltare
 - w&t (wrap and turn) -> avvolgere e girare
 - kwise -> inserire il ferro come per lavorarlo a diritto
@@ -101,7 +102,7 @@ Azioni:
 - join -> passare a / unire
 - tail -> coda di filato
 - Work even -> Lavorare come impostato
-- Switch to longer needles when too crowded -> Passare a ferri piu lunghi quando le maglie diventano troppo numerose per lavorare comodamente
+- Switch to longer needles when too crowded -> Passare a ferri piu lunghi quando le maglie diventano troppo numerose
 - Kitchener Stitch -> Kitchener Stitch o Cucire a Punto Maglia
 - K the knit and p the purl sts -> Lavorare a diritto le m a diritto e a rovescio le m a rovescio
 
@@ -124,6 +125,30 @@ Misure e strumenti:
 - stitch marker -> marcapunti
 - tapestry needle -> ago da lana
 
+CONVERSIONE MISURE (OBBLIGATORIA):
+Quando il testo originale indica misure in pollici (inches, in, o il simbolo "), converti in cm usando: cm = pollici x 2.54, arrotondando al mezzo centimetro piu vicino.
+NON cancellare il valore originale. Mostra prima i cm poi il valore originale tra parentesi.
+Esempio: "Knit until piece measures 10in" -> "Lavorare a diritto fino a quando il pezzo misura 25.5 cm (10in)"
+Esempio: "8 inches" -> "20.5 cm (8in)"
+
+CONVERSIONE FERRI (OBBLIGATORIA):
+Converti sempre le misure US dei ferri nella misura metrica in mm:
+- US 0 -> 2.00 mm
+- US 1 -> 2.25 mm
+- US 2 -> 2.75 mm
+- US 3 -> 3.25 mm
+- US 4 -> 3.50 mm
+- US 5 -> 3.75 mm
+- US 6 -> 4.00 mm
+- US 7 -> 4.50 mm
+- US 8 -> 5.00 mm
+- US 9 -> 5.50 mm
+- US 10 -> 6.00 mm
+- US 11 -> 8.00 mm
+- US 13 -> 9.00 mm
+- US 15 -> 10.00 mm
+Esempio: "US 8 needles" -> "ferri da 5.00 mm (US 8)"
+
 REGOLE:
 1. knit = diritto, purl = rovescio. MAI aggiungere "maglia" davanti.
 2. cast on = avvio, MAI "avviamento".
@@ -132,9 +157,10 @@ REGOLE:
 5. Mantieni la stessa struttura del testo originale.
 6. Misure in cm invariate. Numeri di maglie e ferri invariati. Lettere filato invariate.
 7. Taglie multiple con i due punti: 78 (90: 98: 106), non virgole.
-8. Se il pattern include una sezione Abbreviazioni/Glossario, traducila e usa quelle definizioni nel resto del pattern.
+8. Se il pattern include una sezione Abbreviazioni/Glossario, traducila e usa quelle definizioni.
 9. Per abbreviazioni come ppd, ppr: alla PRIMA occorrenza scrivi la forma completa tra parentesi. Dalle successive usa solo l'abbreviazione.
 10. Adatta le frasi al contesto italiano: non tradurre parola per parola. Evita ripetizioni di verbi.
+11. CONVERTI SEMPRE pollici in cm e ferri US in mm come indicato sopra.
 
 Rispondi SOLO con la traduzione, senza commenti.`,
       messages: [{ role: 'user', content: `Traduci questo pattern di maglia in ${language}. Il testo sorgente e in inglese.\n\n${text}` }],
