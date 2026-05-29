@@ -153,14 +153,17 @@
   color: #3730a3;
 }
 
+/* ── Box di testo: ombra soft per staccarli dallo sfondo ── */
 .custom-textarea {
   width: 100%;
   height: 24rem;
   padding: 1.25rem;
   border-radius: 1rem;
-  border: 1px solid #e2e8f0;
-  background-color: white;
-  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  border: 1px solid #e8edf4;
+  background-color: #ffffff;
+  box-shadow:
+    0 4px 24px -4px rgba(15, 23, 42, 0.08),
+    0 1px 3px 0 rgba(15, 23, 42, 0.04);
   font-family: inherit;
   font-size: 1rem;
   line-height: 1.625;
@@ -173,12 +176,16 @@
 .custom-textarea:focus {
   outline: none;
   border-color: #6366f1;
-  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+  box-shadow:
+    0 0 0 4px rgba(99, 102, 241, 0.1),
+    0 4px 24px -4px rgba(15, 23, 42, 0.08);
 }
 
 .output-textarea {
   background-color: #f8fafc;
-  box-shadow: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
+  box-shadow:
+    inset 0 2px 6px 0 rgba(15, 23, 42, 0.05),
+    0 4px 24px -4px rgba(15, 23, 42, 0.06);
 }
 
 .error-text {
@@ -193,32 +200,45 @@
   margin-top: 1rem;
 }
 
+/* ── Bottone principale: gradiente + ombra dominante ── */
 .translate-btn {
-  background-color: #4f46e5;
+  background: linear-gradient(135deg, #3730a3 0%, #4f46e5 60%, #6366f1 100%);
   color: white;
   font-size: 1.125rem;
-  font-weight: 600;
+  font-weight: 700;
   padding: 1rem 3rem;
   border-radius: 9999px;
   border: none;
   cursor: pointer;
-  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
-  transition: all 0.2s ease;
+  box-shadow:
+    0 10px 25px -5px rgba(79, 70, 229, 0.45),
+    0 4px 10px -3px rgba(79, 70, 229, 0.3);
+  transition: all 0.25s ease;
   min-width: 250px;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
+  letter-spacing: 0.01em;
 }
 
 .translate-btn:hover:not(:disabled) {
-  background-color: #4338ca;
-  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1);
-  transform: translateY(-2px);
+  background: linear-gradient(135deg, #312e81 0%, #4338ca 60%, #4f46e5 100%);
+  box-shadow:
+    0 20px 35px -8px rgba(79, 70, 229, 0.5),
+    0 8px 15px -5px rgba(79, 70, 229, 0.35);
+  transform: translateY(-3px);
+}
+
+.translate-btn:active:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow:
+    0 8px 15px -5px rgba(79, 70, 229, 0.4),
+    0 3px 8px -3px rgba(79, 70, 229, 0.25);
 }
 
 .translate-btn:disabled {
-  background-color: #818cf8;
+  background: #818cf8;
   color: rgba(255, 255, 255, 0.9);
   cursor: not-allowed;
   box-shadow: none;
@@ -237,12 +257,28 @@
   to { transform: rotate(360deg); }
 }
 
+/* ── Trust badge: USP visibile e credibile ── */
 .footer-note {
   margin-top: 1.5rem;
-  font-size: 0.75rem;
-  color: #94a3b8;
-  font-style: italic;
-  font-weight: 500;
+  font-size: 0.8rem;
+  color: #475569;
+  font-style: normal;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 9999px;
+  padding: 0.4rem 1rem;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+}
+
+.footer-note::before {
+  content: "✓";
+  color: #4f46e5;
+  font-weight: 800;
+  font-size: 0.85rem;
 }
 
 @media (max-width: 640px) {
