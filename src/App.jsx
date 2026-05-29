@@ -403,7 +403,7 @@ export default function App() {
             <span className="logo-icon">🧶</span>
             <h1>KnitTranslate</h1>
           </div>
-          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginLeft: "auto" }}>
             {user && (
               <>
                 <span style={{ fontSize: "0.75rem", color: "#94a3b8" }}>
@@ -414,6 +414,7 @@ export default function App() {
                   border: "none", borderRadius: "9999px",
                   padding: "0.3rem 0.85rem", cursor: "pointer", fontWeight: "600"
                 }}>+ Ricarica</button>
+                <span style={{ fontSize: "0.75rem", color: "#94a3b8" }}>{user.email}</span>
                 <button onClick={logout} style={{
                   fontSize: "0.75rem", color: "#94a3b8", background: "none",
                   border: "1px solid #334155", borderRadius: "9999px",
@@ -428,13 +429,29 @@ export default function App() {
                 padding: "0.25rem 0.75rem", cursor: "pointer"
               }}>Accedi</button>
             )}
-            <div className="subtitle">Traduzione professionale di pattern di maglia</div>
           </div>
         </div>
       </header>
 
       {/* MAIN */}
       <main className="main-content">
+
+        {/* HERO TITLE */}
+        <div style={{ textAlign: "center", padding: "2rem 1rem 0.5rem" }}>
+          <h2 style={{
+            fontSize: "1.75rem",
+            fontWeight: "700",
+            color: "#1e293b",
+            letterSpacing: "-0.02em",
+            margin: 0,
+            fontFamily: "Inter, sans-serif",
+            background: "linear-gradient(135deg, #4f46e5, #7c3aed)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+          }}>
+            Traduzione Professionale di Pattern di Maglia
+          </h2>
+        </div>
         <div className="lang-section">
           <span className="section-label">Lingua di destinazione</span>
           <div className="lang-pills">
