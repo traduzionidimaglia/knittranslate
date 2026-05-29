@@ -481,7 +481,7 @@ export default function App() {
               </div>
             </div>
             <textarea value={input} onChange={(e) => setInput(e.target.value)}
-              placeholder="Incolla qui il testo del modello in inglese..."
+              placeholder="Incolla qui il testo COMPLETO del modello in inglese..."
               className="custom-textarea"
             />
           </div>
@@ -516,6 +516,20 @@ export default function App() {
               </>
             ) : "Traduci Modello →"}
           </button>
+          <p style={{
+  marginTop: "1rem",
+  fontSize: "0.78rem",
+  color: "#92400e",
+  background: "#fff7ed",
+  border: "1px solid #fed7aa",
+  borderRadius: "0.75rem",
+  padding: "0.6rem 1rem",
+  maxWidth: "520px",
+  textAlign: "center",
+  lineHeight: 1.5,
+}}>
+  <strong>NB:</strong> è necessario incollare il testo in inglese nella sua interezza. Ogni parte incollata verrà considerata una traduzione a sé stante.
+</p>
           <p className="footer-note">
             Terminologia verificata da una traduttrice professionista esperta di lavoro a maglia — non una semplice traduzione automatica
           </p>
