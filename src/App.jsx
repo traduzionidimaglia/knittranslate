@@ -384,7 +384,7 @@ export default function App() {
           <div className="brand">
             <span className="logo-icon">🧶</span>
             <h1>KnitTranslate</h1>
-            <span className="badge">AI Beta</span>
+            
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
             {user && (
