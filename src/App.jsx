@@ -197,7 +197,6 @@ export default function App() {
           return r.json();
         })
         .then(d => {
-          console.log('Risposta checkout:', d);
           if (d.url) {
             window.location.href = d.url;
           } else {
