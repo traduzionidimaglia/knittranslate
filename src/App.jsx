@@ -409,16 +409,16 @@ export default function App() {
                 <span style={{ fontSize: "0.75rem", color: "#94a3b8" }}>
                   {crediti} {crediti === 1 ? "traduzione" : "traduzioni"} disponibili
                 </span>
+                <span style={{ fontSize: "0.75rem", color: "#94a3b8" }}>{user.email}</span>
                 <button onClick={() => { setModalStep("prezzi"); setShowModal(true); }} style={{
                   fontSize: "0.75rem", color: "white", background: "#4f46e5",
                   border: "none", borderRadius: "9999px",
                   padding: "0.3rem 0.85rem", cursor: "pointer", fontWeight: "600"
                 }}>+ Ricarica</button>
-                <span style={{ fontSize: "0.75rem", color: "#94a3b8" }}>{user.email}</span>
                 <button onClick={logout} style={{
-                  fontSize: "0.75rem", color: "#94a3b8", background: "none",
-                  border: "1px solid #334155", borderRadius: "9999px",
-                  padding: "0.25rem 0.75rem", cursor: "pointer"
+                  fontSize: "0.75rem", color: "white", background: "#6366f1",
+                  border: "none", borderRadius: "9999px",
+                  padding: "0.3rem 0.85rem", cursor: "pointer", fontWeight: "600"
                 }}>Esci</button>
               </>
             )}
@@ -452,6 +452,7 @@ export default function App() {
             Traduzione Professionale di Modelli di Maglia
           </h2>
         </div>
+
         <div className="lang-section">
           <span className="section-label">Lingua di destinazione</span>
           <div className="lang-pills">
