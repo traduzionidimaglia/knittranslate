@@ -449,7 +449,7 @@ export default function App() {
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
           }}>
-            Traduzione Professionale di Pattern di Maglia
+            Traduzione Professionale di Modelli di Maglia
           </h2>
         </div>
         <div className="lang-section">
