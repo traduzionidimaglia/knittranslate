@@ -46,3 +46,8 @@ export default async function handler(req, res) {
 
   res.status(200).json({ received: true });
 }
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
