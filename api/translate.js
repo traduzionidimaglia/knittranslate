@@ -14,7 +14,7 @@ export default async function handler(req, res) {
     },
     body: JSON.stringify({
       model: 'claude-sonnet-4-5',
-      max_tokens: 4000,
+      max_tokens: 8192,
       system: `Sei KnitTranslate AI, specializzato nella traduzione di pattern di maglia ai ferri, calibrato da una traduttrice professionista.
 
 La lingua di destinazione e: ${language}
