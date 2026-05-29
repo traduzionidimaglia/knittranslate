@@ -3,9 +3,9 @@ import Stripe from 'stripe';
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 const PIANI = {
-  single: { priceId: 'price_1TcPeZDzFAPbyVzISB9RhUq3', crediti: 1 },
-  pack3: { priceId: 'price_1TcPfADzFAPbyVzIUtXCYVjp', crediti: 3 },
-  pack10: { priceId: 'price_1TcPfdDzFAPbyVzIA9hmxWx9', crediti: 10 },
+  single: { priceId: 'price_1TcRP0DfTPFearaDhqH0nT4z', crediti: 1 },
+  pack3: { priceId: 'price_1TcROyDfTPFearaDaeVK9hgY', crediti: 3 },
+  pack10: { priceId: 'price_1TcROuDfTPFearaDWg7tWRol', crediti: 10 },
 };
 
 export default async function handler(req, res) {
