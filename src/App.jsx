@@ -282,7 +282,7 @@ export default function App() {
                     </p>
                   ) : (
                     <p style={{ margin: 0, fontSize: "0.8rem", color: "#64748b" }}>
-                      Crediti disponibili: <strong>{traduzioni disponibili}</strong>
+                      Traduzioni disponibili: <strong>{traduzioni disponibili}</strong>
                     </p>
                   )}
                 </div>
