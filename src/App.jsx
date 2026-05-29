@@ -344,7 +344,7 @@ export default function App() {
                       Controlla la tua email!
                     </p>
                     <p style={{ margin: 0, fontSize: "0.8rem", color: "#4a7a4a", lineHeight: 1.5 }}>
-                      Ti abbiamo inviato un link di conferma. Clicca sul link per attivare il tuo account e procedere al pagamento.
+                      Ti abbiamo inviato un link di conferma. Clicca sul link per attivare il tuo account.
                     </p>
                   </div>
                 ) : (
