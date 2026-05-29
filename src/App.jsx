@@ -513,7 +513,7 @@ export default function App() {
                 </svg>
                 Elaborazione...
               </>
-            ) : "Traduci Pattern →"}
+            ) : "Traduci Modello →"}
           </button>
           <p className="footer-note">
             Terminologia verificata da una traduttrice professionista esperta di lavoro a maglia — non una semplicetraduzione automatica
