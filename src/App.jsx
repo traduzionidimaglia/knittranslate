@@ -471,7 +471,7 @@ export default function App() {
           <div className="input-box">
             <div className="box-header">
               <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-                <label className="section-label" style={{ marginBottom: 0 }}>Pattern Originale</label>
+                <label className="section-label" style={{ marginBottom: 0 }}>Modello Originale</label>
                 <div className="lang-pills" style={{ padding: "0.15rem" }}>
                   <span className="lang-btn active" style={{ cursor: "default", padding: "0.25rem 0.75rem", fontSize: "0.75rem" }}>
                     🇬🇧 Inglese
@@ -480,7 +480,7 @@ export default function App() {
               </div>
             </div>
             <textarea value={input} onChange={(e) => setInput(e.target.value)}
-              placeholder="Incolla qui il testo del pattern in inglese..."
+              placeholder="Incolla qui il testo del modello in inglese..."
               className="custom-textarea"
             />
           </div>
