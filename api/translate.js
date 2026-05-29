@@ -113,7 +113,13 @@ Azioni:
 - Finishing -> Finiture
 - join -> passare a / unire
 - tail -> coda di filato
-- Kitchener Stitch -> Kitchener Stitch o Cucire a Punto Maglia
+- Kitchener Stitch -> Punto Maglia
+- Graft -> chiudere (MAI "cucire" o "unire")
+- once more -> ancora una volta (MAI "una volta ancora")
+- break -> tagliare (MAI "spezzare")
+- cdd -> accavallata doppia centrale
+- Sssk -> pppd (PRIMA OCCORRENZA: pppd (passa 1m, passa 1m, passa 1m, lavorare le 3 m assieme a diritto ritorto). Poi solo pppd)
+- backstitch -> punto indietro
 - w&t -> avvolgere e girare
 
 Sezioni:
