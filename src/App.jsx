@@ -390,7 +390,7 @@ export default function App() {
             {user && (
               <>
                 <span style={{ fontSize: "0.75rem", color: "#94a3b8" }}>
-                  {traduzioni disponibili} {crediti === 1 ? "credito" : "crediti"} disponibili
+                  {crediti} {crediti === 1 ? "traduzione" : "traduzioni"} disponibili
                 </span>
                 <button onClick={() => { setModalStep("prezzi"); setShowModal(true); }} style={{
                   fontSize: "0.75rem", color: "white", background: "#4f46e5",
