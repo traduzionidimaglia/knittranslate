@@ -1,5 +1,4 @@
 import Stripe from 'stripe';
-
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 const PIANI = {
@@ -14,14 +13,13 @@ export default async function handler(req, res) {
   }
 
   const { pianoId, userId, userEmail } = req.body;
-
   const piano = PIANI[pianoId];
+
   if (!piano) {
     return res.status(400).json({ error: 'Piano non valido' });
   }
 
   const session = await stripe.checkout.sessions.create({
-    payment_method_types: ['card'],
     line_items: [{ price: piano.priceId, quantity: 1 }],
     mode: 'payment',
     success_url: `https://knittranslate.vercel.app?payment=success&piano=${pianoId}&userId=${userId}`,
