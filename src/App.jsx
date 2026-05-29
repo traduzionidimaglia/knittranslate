@@ -528,7 +528,7 @@ export default function App() {
   textAlign: "center",
   lineHeight: 1.5,
 }}>
-  <strong>NB:</strong> è necessario incollare il testo in inglese nella sua interezza. Ogni parte incollata verrà considerata una traduzione a sé stante.
+  <strong>ATTENZIONE:</strong> è necessario INCOLLARE il testo in inglese NELLA SUA INTEREZZA. Ogni parte incollata verrà considerata una traduzione a sé stante.
 </p>
           <p className="footer-note">
             Terminologia verificata da una traduttrice professionista esperta di lavoro a maglia — non una semplice traduzione automatica
