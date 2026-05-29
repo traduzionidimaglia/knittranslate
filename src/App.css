@@ -246,7 +246,7 @@
 
 .translate-btn:disabled {
   background: linear-gradient(135deg, #fdba74 0%, #fed7aa 100%);
-  color: rgba(255, 255, 255, 0.95);
+  color: #92400e;
   cursor: not-allowed;
   box-shadow: none;
   transform: none;

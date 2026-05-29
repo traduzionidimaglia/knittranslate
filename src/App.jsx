@@ -133,7 +133,7 @@ export default function App() {
   };
 
   const handleTraduciClick = () => {
-    if (!input.trim()) return;
+    if (input.trim().length < 15) return;
     if (!user || crediti <= 0) {
       setModalStep("prezzi");
       setShowModal(true);
@@ -504,7 +504,7 @@ export default function App() {
 
         <div className="action-section">
           <button onClick={handleTraduciClick}
-            disabled={loading || !input.trim()}
+            disabled={loading || input.trim().length < 15}
             className="translate-btn">
             {loading ? (
               <>
