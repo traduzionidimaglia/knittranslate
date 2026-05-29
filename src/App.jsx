@@ -377,7 +377,7 @@ export default function App() {
                       fontSize: "0.95rem", fontWeight: "700", cursor: "pointer",
                       marginBottom: "1rem"
                     }}>
-                      {authLoading ? "..." : authMode === "login" ? "Accedi" : "Registrati e procedi al pagamento →"}
+                      {authLoading ? "..." : authMode === "login" ? "Accedi" : "Registrati Gratuitamente →"}
                     </button>
                     <p style={{ textAlign: "center", fontSize: "0.8rem", color: "#64748b", margin: 0 }}>
                       {authMode === "login" ? "Non hai un account? " : "Hai già un account? "}
