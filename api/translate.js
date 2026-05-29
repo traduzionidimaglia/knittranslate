@@ -240,7 +240,7 @@ Misure:
 1. Mantieni la stessa struttura del testo originale.
 2. Numeri di maglie, ferri, giri NON si traducono.
 3. Lettere filato (A, B, C, D) rimangono invariate.
-4. Nomi propri con maiuscole (German Twisted, Kitchener Stitch): lasciare in inglese.
+4. Non tradurre mai i nomi di punti e tecniche scritti in Title Case (ogni parola inizia con la maiuscola), come "Broken Rib Stitch", "Garter Tab Cast On", "German Short Rows". Lasciali esattamente come sono nell'originale inglese. Fai eccezione solo per i termini presenti nel dizionario qui sotto, che hanno una traduzione italiana consolidata.
 5. Per italiano: taglie multiple con i due punti: 78 (90: 98: 106).
 6. Per spagnolo: taglie multiple con trattino: -a) 85 -b) 94 -c) 100.
 7. Adatta le frasi al contesto: evita ripetizioni di verbi.
