@@ -180,13 +180,18 @@ export default function App() {
   };
 
   const selezionaPiano = (piano) => {
-    setPianoSelezionato(piano);
+    setPianoSelezionato(piano);console.log('selezionaPiano chiamato, user:', user, 'piano:', piano.id);
     if (!user) {
       setAuthMode("signup");
       setModalStep("auth");
     } else {
-      fetch('/api/checkout', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ pianoId: piano.id, userId: user.id, userEmail: user.email }) }).then(r => r.json()).then(d => { if(d.url) window.location.href = d.url; });
-    }
+fetch('/api/checkout', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ pianoId: piano.id, userId: user.id, userEmail: user.email }) })
+  .then(r => r.json())
+  .then(d => { 
+    console.log('Risposta checkout:', d); 
+    if(d.url) window.location.href = d.url; 
+  })
+  .catch(e => console.error('Errore checkout:', e));    }
   };
 
   return (
