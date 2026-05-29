@@ -185,7 +185,7 @@ export default function App() {
       setAuthMode("signup");
       setModalStep("auth");
     } else {
-      alert("Pagamento Stripe in arrivo! Piano selezionato: " + piano.nome);
+      fetch('/api/checkout', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ pianoId: piano.id, userId: user.id, userEmail: user.email }) }).then(r => r.json()).then(d => { if(d.url) window.location.href = d.url; });
     }
   };
 
