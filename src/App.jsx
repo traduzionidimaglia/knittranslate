@@ -282,7 +282,7 @@ export default function App() {
                     </p>
                   ) : (
                     <p style={{ margin: 0, fontSize: "0.8rem", color: "#64748b" }}>
-                      Crediti disponibili: <strong>{crediti}</strong>
+                      Crediti disponibili: <strong>{traduzioni disponibili}</strong>
                     </p>
                   )}
                 </div>
@@ -390,7 +390,7 @@ export default function App() {
             {user && (
               <>
                 <span style={{ fontSize: "0.75rem", color: "#94a3b8" }}>
-                  {crediti} {crediti === 1 ? "credito" : "crediti"} disponibili
+                  {traduzioni disponibili} {crediti === 1 ? "credito" : "crediti"} disponibili
                 </span>
                 <button onClick={() => { setModalStep("prezzi"); setShowModal(true); }} style={{
                   fontSize: "0.75rem", color: "white", background: "#4f46e5",
