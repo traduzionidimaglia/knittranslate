@@ -8,17 +8,27 @@ const supabase = createClient(
 );
 
 export default async function handler(req, res) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+
   const sig = req.headers['stripe-signature'];
+  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+
   let event;
+  let rawBody = '';
+
+  await new Promise((resolve, reject) => {
+    req.on('data', chunk => { rawBody += chunk; });
+    req.on('end', resolve);
+    req.on('error', reject);
+  });
 
   try {
-    event = stripe.webhooks.constructEvent(
-      req.body,
-      sig,
-      process.env.STRIPE_WEBHOOK_SECRET
-    );
+    event = stripe.webhooks.constructEvent(rawBody, sig, webhookSecret);
   } catch (err) {
-    return res.status(400).json({ error: 'Webhook error' });
+    console.error('Webhook signature error:', err.message);
+    return res.status(400).json({ error: 'Webhook error: ' + err.message });
   }
 
   if (event.type === 'checkout.session.completed') {
@@ -46,8 +56,3 @@ export default async function handler(req, res) {
 
   res.status(200).json({ received: true });
 }
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
