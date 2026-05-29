@@ -516,7 +516,7 @@ export default function App() {
             ) : "Traduci Pattern →"}
           </button>
           <p className="footer-note">
-            Terminologia verificata da una traduttrice esperta di maglia — non una traduzione automatica
+            Terminologia verificata da una traduttrice professionista esperta di lavoro a maglia — non una semplicetraduzione automatica
           </p>
         </div>
       </main>
