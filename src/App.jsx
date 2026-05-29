@@ -7,13 +7,15 @@ const LANGUAGES = [
   { code: "spagnolo", label: "🇪🇸 Spagnolo" },
 ];
 
-const ESEMPIO_EN = `With size US 8/5mm needles, cast on 78 (90: 98: 106) sts.
-Row 1 (RS) K2, *p2, k2; rep from * to end.
-Row 2 (WS) K the knit and p the purl sts.`;
+const ESEMPIO_EN = `SECTION 7 - Wavy Border
+Row 1 (RS): Using MC, k3, yo, k12, slm, *(yo twice,
+k2tog) 8 times, yo twice, sk2p, yo twice, (k2tog, yo twice)
+8 times, slm, k1, slm; repeat from * 11 more times, (yo
+twice, k2tog) 8 times, yo twice, sk2p, yo twice, (k2tog, yo
+twice) 8 times, slm, k12, yo, sl3 wyif. 733 sts.`;
 
-const ESEMPIO_IT = `Con i ferri da 5.00 mm (US 8), avviare 78 (90: 98: 106) m.
-Ferro 1 (DL) 2dir, *2rov, 2dir; rip da * fino alla fine.
-Ferro 2 (RL) Lavorare a diritto le m a diritto e a rovescio le m a rovescio.`;
+const ESEMPIO_IT = `SEZIONE 7 - Bordo Ondulato
+Ferro 1 (DL): Usando MC, 3dir, gettato, 12dir, passare marcapunti, *(gettato due volte, 2assdir) 8 volte, gettato due volte, accav doppia, gettato due volte, (2assdir, gettato due volte) 8 volte, passare marcapunti, 1dir, passare marcapunti; ripetere da * altre 11 volte, (gettato due volte, 2assdir) 8 volte, gettato due volte, accav doppia, gettato due volte, (2assdir, gettato due volte) 8 volte, passare marcapunti, 12dir, gettato, passare 3 m con il filo davanti. 733 m.`;
 
 const PIANI = [
   {
