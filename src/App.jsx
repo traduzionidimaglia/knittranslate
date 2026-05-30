@@ -578,7 +578,7 @@ export default function App() {
           </p>
         </div>
       </main>
-      {/* FOOTER */}
+     {/* FOOTER */}
 <footer style={{
   textAlign: "center",
   padding: "2rem 1rem",
@@ -587,14 +587,12 @@ export default function App() {
   fontSize: "0.75rem",
   color: "#94a3b8",
 }}>
-  <a href="/termini.html" target="_blank" rel="noopener noreferrer" style={{
-    color: "#6366f1", textDecoration: "none", fontWeight: "600"
-  }}>
-    Termini di Servizio
-  </a>
+  <a href="/termini.html" target="_blank" rel="noopener noreferrer" style={{ color: "#6366f1", textDecoration: "none", fontWeight: "600" }}>Termini di Servizio</a>
   <span style={{ margin: "0 0.5rem" }}>·</span>
-  © 2025 KnitTranslate — Tutti i diritti riservati
+  <a href="/privacy.html" target="_blank" rel="noopener noreferrer" style={{ color: "#6366f1", textDecoration: "none", fontWeight: "600" }}>Privacy Policy</a>
+  <span style={{ margin: "0 0.5rem" }}>·</span>
+  <a href="/cookie.html" target="_blank" rel="noopener noreferrer" style={{ color: "#6366f1", textDecoration: "none", fontWeight: "600" }}>Cookie Policy</a>
+  <br /><br />
+  © 2026 KnitTranslate — Tutti i diritti riservati
 </footer>
-    </div>
-  );
 }
