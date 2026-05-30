@@ -445,7 +445,7 @@ export default function App() {
     fontWeight: "600",
     letterSpacing: "0.01em",
   }}>
-    🎉 Offerta di Lancio — Prezzi speciali per i primi 7 giorni! Approfitta subito.
+    🎉 Offerta di Lancio — Prezzi speciali per i primi 3 giorni! Approfitta subito.
   </div>
 )}
       {/* HEADER */}
