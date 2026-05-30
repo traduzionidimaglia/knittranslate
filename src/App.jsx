@@ -455,7 +455,8 @@ export default function App() {
             <span className="logo-icon">🧶</span>
             <h1>KnitTranslate</h1>
           </div>
-          <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginLeft: "auto" }}>
+          {/* DESKTOP: tutto su una riga */}
+          <div className="header-desktop">
             {user && (
               <>
                 <span style={{ fontSize: "0.75rem", color: "#94a3b8" }}>
@@ -482,6 +483,36 @@ export default function App() {
               }}>Accedi</button>
             )}
           </div>
+          {/* MOBILE: due righe */}
+          <div className="header-mobile">
+            {!user && (
+              <button onClick={() => { setAuthMode("login"); setModalStep("auth"); setShowModal(true); }} style={{
+                fontSize: "0.75rem", color: "#94a3b8", background: "none",
+                border: "1px solid #334155", borderRadius: "9999px",
+                padding: "0.25rem 0.75rem", cursor: "pointer"
+              }}>Accedi</button>
+            )}
+            {user && (
+              <button onClick={logout} style={{
+                fontSize: "0.75rem", color: "white", background: "#6366f1",
+                border: "none", borderRadius: "9999px",
+                padding: "0.3rem 0.85rem", cursor: "pointer", fontWeight: "600"
+              }}>Esci</button>
+            )}
+          </div>
+          {user && (
+            <div className="header-mobile-bottom">
+              <span style={{ fontSize: "0.7rem", color: "#94a3b8" }}>
+                {crediti} {crediti === 1 ? "traduzione" : "traduzioni"} disponibili
+              </span>
+              <span style={{ fontSize: "0.7rem", color: "#94a3b8" }}>{user.email}</span>
+              <button onClick={() => { setModalStep("prezzi"); setShowModal(true); }} style={{
+                fontSize: "0.7rem", color: "white", background: "#4f46e5",
+                border: "none", borderRadius: "9999px",
+                padding: "0.25rem 0.75rem", cursor: "pointer", fontWeight: "600"
+              }}>+ Ricarica</button>
+            </div>
+          )}
         </div>
       </header>
 

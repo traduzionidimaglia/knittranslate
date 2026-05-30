@@ -310,3 +310,66 @@
   color: #4338ca;
   text-decoration: underline;
 }
+
+
+
+/* ── Header: desktop vs mobile ── */
+.header-desktop {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-left: auto;
+}
+
+.header-mobile {
+  display: none;
+}
+
+.header-mobile-bottom {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .header {
+    padding: 0.75rem 1rem;
+  }
+
+  .header-content {
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  /* Nasconde versione desktop */
+  .header-desktop {
+    display: none;
+  }
+
+  /* Mostra Esci/Accedi a destra del logo */
+  .header-mobile {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+  }
+
+  /* Seconda riga: crediti + email + ricarica */
+  .header-mobile-bottom {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    flex-wrap: wrap;
+    padding-top: 0.25rem;
+  }
+
+  .translate-btn {
+    min-width: unset;
+    width: 100%;
+    padding: 1rem 1.5rem;
+  }
+
+  .footer-note {
+    text-align: center;
+    border-radius: 0.75rem;
+    font-size: 0.75rem;
+  }
+}
