@@ -373,3 +373,11 @@
     font-size: 0.75rem;
   }
 }
+@media (max-width: 640px) {
+  .header-mobile-bottom span {
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
