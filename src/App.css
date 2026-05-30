@@ -334,9 +334,21 @@
     padding: 0.75rem 1rem;
   }
 
+  /* Header su due righe pulite */
   .header-content {
     flex-wrap: wrap;
-    gap: 0.4rem;
+    row-gap: 0.6rem;
+  }
+
+  /* Logo più piccolo su mobile */
+  .logo-icon {
+    font-size: 1.6rem;
+  }
+  .brand h1 {
+    font-size: 1.2rem;
+  }
+  .brand {
+    flex: 0 1 auto;
   }
 
   /* Nasconde versione desktop */
@@ -344,21 +356,35 @@
     display: none;
   }
 
-  /* Mostra Esci/Accedi a destra del logo */
+  /* Riga 1: Esci/Accedi a destra del logo */
   .header-mobile {
     display: flex;
     align-items: center;
     margin-left: auto;
   }
 
-  /* Seconda riga: crediti + email + ricarica */
+  /* Riga 2: forza nuova riga a tutta larghezza */
   .header-mobile-bottom {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    justify-content: space-between;
+    gap: 0.4rem;
+    flex-basis: 100%;
     width: 100%;
-    flex-wrap: wrap;
-    padding-top: 0.25rem;
+  }
+
+  /* Tronca email per non sforare */
+  .header-mobile-bottom span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+  }
+  .header-mobile-bottom span:nth-child(2) {
+    flex: 1 1 auto;
+  }
+  .header-mobile-bottom button {
+    flex-shrink: 0;
   }
 
   .translate-btn {
@@ -373,14 +399,7 @@
     font-size: 0.75rem;
   }
 }
-@media (max-width: 640px) {
-  .header-mobile-bottom span {
-    max-width: 120px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-}
+
 html, body {
   overflow-x: hidden;
   max-width: 100vw;
