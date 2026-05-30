@@ -578,6 +578,23 @@ export default function App() {
           </p>
         </div>
       </main>
+      {/* FOOTER */}
+<footer style={{
+  textAlign: "center",
+  padding: "2rem 1rem",
+  borderTop: "1px solid #e2e8f0",
+  marginTop: "2rem",
+  fontSize: "0.75rem",
+  color: "#94a3b8",
+}}>
+  <a href="/termini.html" target="_blank" rel="noopener noreferrer" style={{
+    color: "#6366f1", textDecoration: "none", fontWeight: "600"
+  }}>
+    Termini di Servizio
+  </a>
+  <span style={{ margin: "0 0.5rem" }}>·</span>
+  © 2025 KnitTranslate — Tutti i diritti riservati
+</footer>
     </div>
   );
 }
