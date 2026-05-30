@@ -613,7 +613,7 @@ export default function App() {
               textAlign: "center",
               lineHeight: 1.5,
             }}>
-💡 <strong>Tip per non sprecare crediti:</strong> I PDF a volte si copiano a scatti. Per una traduzione perfetta, ti suggeriamo di preparare prima tutto il testo del modello su un documento (es. Note o Word) e incollarlo qui in un colpo solo.            </p>
+💡 <strong>Suggerimento per non sprecare crediti:</strong> I PDF a volte si copiano a scatti. Per una traduzione perfetta, ti suggeriamo di preparare prima tutto il testo del modello su un documento (es. Note o Word) e incollarlo qui in un colpo solo.            </p>
           )}
 
           <p className="footer-note">
