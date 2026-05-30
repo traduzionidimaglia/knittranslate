@@ -557,7 +557,7 @@ export default function App() {
               textAlign: "center",
               lineHeight: 1.5,
             }}>
-              <strong>NB:</strong> è necessario incollare il testo in inglese nella sua interezza. Ogni parte incollata verrà considerata una traduzione a sé stante.
+              <strong>NB:</strong> è necessario incollare il testo in inglese nella sua interezza prima di premere il pulsante Traduci Modello.
             </p>
           )}
 
