@@ -61,6 +61,7 @@ export default function App() {
   const [showModal, setShowModal] = useState(false);
   const [modalStep, setModalStep] = useState("prezzi");
   const [pianoSelezionato, setPianoSelezionato] = useState(null);
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
 
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
@@ -121,7 +122,7 @@ export default function App() {
     } else {
       const { error } = await supabase.auth.signUp({ email, password });
       if (error) setAuthError(error.message);
-      else { setConfirmMessage(true); setEmail(""); setPassword(""); }
+      else { setConfirmMessage(true); setEmail(""); setPassword(""); setAcceptedTerms(false); }
     }
     setAuthLoading(false);
   };
@@ -206,6 +207,8 @@ export default function App() {
         .catch(e => alert('Errore checkout: ' + e.message));
     }
   };
+
+  const inputAttivo = input.trim().length >= 15;
 
   return (
     <div className="app-container">
@@ -371,17 +374,40 @@ export default function App() {
                         {authError}
                       </p>
                     )}
-                    <button onClick={loginEmail} disabled={authLoading} style={{
-                      width: "100%", padding: "0.875rem", borderRadius: "0.875rem",
-                      background: "#4f46e5", color: "white", border: "none",
-                      fontSize: "0.95rem", fontWeight: "700", cursor: "pointer",
-                      marginBottom: "1rem"
-                    }}>
+
+                    {/* CHECKBOX TERMINI — solo in registrazione */}
+                    {authMode === "signup" && (
+                      <label style={{
+                        display: "flex", alignItems: "flex-start", gap: "0.5rem",
+                        marginBottom: "1rem", cursor: "pointer"
+                      }}>
+                        <input
+                          type="checkbox"
+                          checked={acceptedTerms}
+                          onChange={(e) => setAcceptedTerms(e.target.checked)}
+                          style={{ marginTop: "0.2rem", accentColor: "#4f46e5", flexShrink: 0 }}
+                        />
+                        <span style={{ fontSize: "0.75rem", color: "#64748b", lineHeight: 1.5 }}>
+                          Accetto i <strong>Termini di Servizio</strong> e il <strong>Disclaimer sul Diritto d'Autore</strong>. I pattern caricati restano di proprietà dei rispettivi autori e sono responsabile del rispetto delle normative vigenti.
+                        </span>
+                      </label>
+                    )}
+
+                    <button onClick={loginEmail}
+                      disabled={authLoading || (authMode === "signup" && !acceptedTerms)}
+                      style={{
+                        width: "100%", padding: "0.875rem", borderRadius: "0.875rem",
+                        background: "#4f46e5", color: "white", border: "none",
+                        fontSize: "0.95rem", fontWeight: "700", cursor: authLoading || (authMode === "signup" && !acceptedTerms) ? "not-allowed" : "pointer",
+                        marginBottom: "1rem",
+                        opacity: (authMode === "signup" && !acceptedTerms) ? 0.5 : 1,
+                        transition: "opacity 0.2s ease"
+                      }}>
                       {authLoading ? "..." : authMode === "login" ? "Accedi" : "Registrati Gratuitamente →"}
                     </button>
                     <p style={{ textAlign: "center", fontSize: "0.8rem", color: "#64748b", margin: 0 }}>
                       {authMode === "login" ? "Non hai un account? " : "Hai già un account? "}
-                      <button onClick={() => { setAuthMode(authMode === "login" ? "signup" : "login"); setAuthError(""); }} style={{
+                      <button onClick={() => { setAuthMode(authMode === "login" ? "signup" : "login"); setAuthError(""); setAcceptedTerms(false); }} style={{
                         color: "#4f46e5", background: "none", border: "none",
                         cursor: "pointer", fontWeight: "600", fontSize: "0.8rem"
                       }}>
@@ -504,7 +530,7 @@ export default function App() {
 
         <div className="action-section">
           <button onClick={handleTraduciClick}
-            disabled={loading || input.trim().length < 15}
+            disabled={loading || !inputAttivo}
             className="translate-btn">
             {loading ? (
               <>
@@ -516,22 +542,39 @@ export default function App() {
               </>
             ) : "Traduci Modello →"}
           </button>
-          <p style={{
-  marginTop: "1rem",
-  fontSize: "0.78rem",
-  color: "#92400e",
-  background: "#fff7ed",
-  border: "1px solid #fed7aa",
-  borderRadius: "0.75rem",
-  padding: "0.6rem 1rem",
-  maxWidth: "520px",
-  textAlign: "center",
-  lineHeight: 1.5,
-}}>
-  <strong>ATTENZIONE:</strong> è necessario incollare il testo del modello in inglese INTERAMENTE prima di premere il tasto Traduci Modello.  
-</p>
+
+          {/* DISCLAIMER NB — sparisce quando il bottone si accende */}
+          {!inputAttivo && (
+            <p style={{
+              marginTop: "1rem",
+              fontSize: "0.78rem",
+              color: "#92400e",
+              background: "#fff7ed",
+              border: "1px solid #fed7aa",
+              borderRadius: "0.75rem",
+              padding: "0.6rem 1rem",
+              maxWidth: "520px",
+              textAlign: "center",
+              lineHeight: 1.5,
+            }}>
+              <strong>NB:</strong> è necessario incollare il testo in inglese nella sua interezza. Ogni parte incollata verrà considerata una traduzione a sé stante.
+            </p>
+          )}
+
           <p className="footer-note">
             Terminologia verificata da una traduttrice professionista esperta di lavoro a maglia — non una semplice traduzione automatica
+          </p>
+
+          <p style={{
+            marginTop: "1.5rem",
+            fontSize: "0.7rem",
+            color: "#94a3b8",
+            textAlign: "center",
+            lineHeight: 1.6,
+            maxWidth: "600px",
+            margin: "1.5rem auto 0",
+          }}>
+            KnitTranslate è uno strumento di traduzione assistita. I pattern di maglia rimangono di proprietà esclusiva dei rispettivi autori e designer. L'utente è responsabile del rispetto dei diritti d'autore relativi ai testi caricati. KnitTranslate declina ogni responsabilità per usi non conformi alla normativa vigente.
           </p>
         </div>
       </main>
