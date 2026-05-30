@@ -528,7 +528,7 @@ export default function App() {
   textAlign: "center",
   lineHeight: 1.5,
 }}>
-  <strong>ATTENZIONE:</strong> è necessario incollare il testo del modelloin inglese INTERAMENTE prima di premere il tasto traduci.  
+  <strong>ATTENZIONE:</strong> è necessario incollare il testo del modello in inglese INTERAMENTE prima di premere il tasto traduci.  
 </p>
           <p className="footer-note">
             Terminologia verificata da una traduttrice professionista esperta di lavoro a maglia — non una semplice traduzione automatica
