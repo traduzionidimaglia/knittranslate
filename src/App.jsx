@@ -17,12 +17,15 @@ twice) 8 times, slm, k12, yo, sl3 wyif. 733 sts.`;
 const ESEMPIO_IT = `SEZIONE 7 - Bordo Ondulato
 Ferro 1 (DL): Usando MC, 3dir, gettato, 12dir, passare marcapunti, *(gettato due volte, 2assdir) 8 volte, gettato due volte, accav doppia, gettato due volte, (2assdir, gettato due volte) 8 volte, passare marcapunti, 1dir, passare marcapunti; ripetere da * altre 11 volte, (gettato due volte, 2assdir) 8 volte, gettato due volte, accav doppia, gettato due volte, (2assdir, gettato due volte) 8 volte, passare marcapunti, 12dir, gettato, passare 3 m con il filo davanti. 733 m.`;
 
+const OFFERTA_LANCIO = true; // Cambia a false per terminare l'offerta
+
 const PIANI = [
   {
     id: "single",
     nome: "Singolo",
-    prezzo: "€4,50",
-    prezzoUnitario: "€4,50 / pattern",
+    prezzo: OFFERTA_LANCIO ? "€2,99" : "€4,50",
+    prezzoOriginale: "€4,50",
+    prezzoUnitario: OFFERTA_LANCIO ? "€2,99 / pattern" : "€4,50 / pattern",
     crediti: 1,
     descrizione: "1 pattern tradotto",
     highlight: false,
@@ -30,21 +33,23 @@ const PIANI = [
   {
     id: "pack3",
     nome: "Pacchetto 3",
-    prezzo: "€11,49",
-    prezzoUnitario: "€3,83 / pattern",
+    prezzo: OFFERTA_LANCIO ? "€6,99" : "€11,49",
+    prezzoOriginale: "€11,49",
+    prezzoUnitario: OFFERTA_LANCIO ? "€2,33 / pattern" : "€3,83 / pattern",
     crediti: 3,
     descrizione: "3 pattern tradotti",
-    risparmio: "Risparmi €2,01",
+    risparmio: OFFERTA_LANCIO ? "Risparmi €4,50" : "Risparmi €2,01",
     highlight: true,
   },
   {
     id: "pack10",
     nome: "Pacchetto 10",
-    prezzo: "€29,90",
-    prezzoUnitario: "€2,99 / pattern",
+    prezzo: OFFERTA_LANCIO ? "€19,90" : "€29,90",
+    prezzoOriginale: "€29,90",
+    prezzoUnitario: OFFERTA_LANCIO ? "€1,99 / pattern" : "€2,99 / pattern",
     crediti: 10,
     descrizione: "10 pattern tradotti",
-    risparmio: "Risparmi €15,10",
+    risparmio: OFFERTA_LANCIO ? "Risparmi €10,00" : "Risparmi €15,10",
     highlight: false,
   },
 ];
@@ -281,13 +286,21 @@ export default function App() {
                         </p>
                       </div>
                       <div style={{ textAlign: "right", flexShrink: 0, marginLeft: "1rem" }}>
-                        <span style={{
-                          fontWeight: "800", fontSize: "1.15rem",
-                          color: piano.highlight ? "#4f46e5" : "#0f172a"
-                        }}>
-                          {piano.prezzo}
-                        </span>
-                      </div>
+  {OFFERTA_LANCIO && (
+    <span style={{
+      fontSize: "0.8rem", color: "#94a3b8",
+      textDecoration: "line-through", display: "block"
+    }}>
+      {piano.prezzoOriginale}
+    </span>
+  )}
+  <span style={{
+    fontWeight: "800", fontSize: "1.15rem",
+    color: piano.highlight ? "#4f46e5" : "#16a34a"
+  }}>
+    {piano.prezzo}
+  </span>
+</div>
                     </button>
                   ))}
                 </div>
@@ -421,7 +434,20 @@ export default function App() {
           </div>
         </div>
       )}
-
+{/* BANNER OFFERTA LANCIO */}
+{OFFERTA_LANCIO && (
+  <div style={{
+    background: "linear-gradient(135deg, #4f46e5, #7c3aed)",
+    color: "white",
+    textAlign: "center",
+    padding: "0.6rem 1rem",
+    fontSize: "0.82rem",
+    fontWeight: "600",
+    letterSpacing: "0.01em",
+  }}>
+    🎉 Offerta di Lancio — Prezzi speciali per i primi 7 giorni! Approfitta subito.
+  </div>
+)}
       {/* HEADER */}
       <header className="header">
         <div className="header-content">
@@ -580,19 +606,21 @@ export default function App() {
       </main>
      {/* FOOTER */}
 <footer style={{
-  textAlign: "center",
-  padding: "2rem 1rem",
-  borderTop: "1px solid #e2e8f0",
-  marginTop: "2rem",
-  fontSize: "0.75rem",
-  color: "#94a3b8",
-}}>
-  <a href="/termini.html" target="_blank" rel="noopener noreferrer" style={{ color: "#6366f1", textDecoration: "none", fontWeight: "600" }}>Termini di Servizio</a>
-  <span style={{ margin: "0 0.5rem" }}>·</span>
-  <a href="/privacy.html" target="_blank" rel="noopener noreferrer" style={{ color: "#6366f1", textDecoration: "none", fontWeight: "600" }}>Privacy Policy</a>
-  <span style={{ margin: "0 0.5rem" }}>·</span>
-  <a href="/cookie.html" target="_blank" rel="noopener noreferrer" style={{ color: "#6366f1", textDecoration: "none", fontWeight: "600" }}>Cookie Policy</a>
-  <br /><br />
-  © 2026 KnitTranslate — Tutti i diritti riservati
-</footer>
+        textAlign: "center",
+        padding: "2rem 1rem",
+        borderTop: "1px solid #e2e8f0",
+        marginTop: "2rem",
+        fontSize: "0.75rem",
+        color: "#94a3b8",
+      }}>
+        <a href="/termini.html" target="_blank" rel="noopener noreferrer" style={{ color: "#6366f1", textDecoration: "none", fontWeight: "600" }}>Termini di Servizio</a>
+        <span style={{ margin: "0 0.5rem" }}>·</span>
+        <a href="/privacy.html" target="_blank" rel="noopener noreferrer" style={{ color: "#6366f1", textDecoration: "none", fontWeight: "600" }}>Privacy Policy</a>
+        <span style={{ margin: "0 0.5rem" }}>·</span>
+        <a href="/cookie.html" target="_blank" rel="noopener noreferrer" style={{ color: "#6366f1", textDecoration: "none", fontWeight: "600" }}>Cookie Policy</a>
+        <br /><br />
+        © 2026 KnitTranslate — Tutti i diritti riservati
+      </footer>
+    </div>
+  );
 }

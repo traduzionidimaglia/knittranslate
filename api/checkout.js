@@ -1,10 +1,21 @@
 import Stripe from 'stripe';
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
+const OFFERTA_LANCIO = true; // Cambia a false per terminare l'offerta
+
 const PIANI = {
-  single: { priceId: 'price_1TcRP0DfTPFearaDhqH0nT4z', crediti: 1 },
-  pack3: { priceId: 'price_1TcROyDfTPFearaDaeVK9hgY', crediti: 3 },
-  pack10: { priceId: 'price_1TcROuDfTPFearaDWg7tWRol', crediti: 10 },
+  single: { 
+    priceId: OFFERTA_LANCIO ? 'price_1TcmG4DfTPFearaDL7tss9HU' : 'price_1TcRP0DfTPFearaDhqH0nT4z', 
+    crediti: 1 
+  },
+  pack3: { 
+    priceId: OFFERTA_LANCIO ? 'price_1TcmGxDfTPFearaDi88aNzzW' : 'price_1TcROyDfTPFearaDaeVK9hgY', 
+    crediti: 3 
+  },
+  pack10: { 
+    priceId: OFFERTA_LANCIO ? 'price_1TcmHpDfTPFearaDlAvGnnn5' : 'price_1TcROuDfTPFearaDWg7tWRol', 
+    crediti: 10 
+  },
 };
 
 export default async function handler(req, res) {
