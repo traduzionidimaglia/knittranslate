@@ -22,8 +22,8 @@ export default async function handler(req, res) {
   const session = await stripe.checkout.sessions.create({
     line_items: [{ price: piano.priceId, quantity: 1 }],
     mode: 'payment',
-    success_url: `https://knittranslate.vercel.app?payment=success&piano=${pianoId}&userId=${userId}`,
-    cancel_url: `https://knittranslate.vercel.app?payment=cancelled`,
+    success_url: `https://knittranslate.com?payment=success&piano=${pianoId}&userId=${userId}`,
+    cancel_url: `https://knittranslate.com?payment=cancelled`,
     customer_email: userEmail,
     metadata: { userId, pianoId, crediti: piano.crediti.toString() },
   });
