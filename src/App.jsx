@@ -86,7 +86,14 @@ export default function App() {
     });
     return () => subscription.unsubscribe();
   }, []);
-
+// Ricarica crediti quando la finestra torna in focus
+useEffect(() => {
+  const handleFocus = () => {
+    if (user) caricaCrediti(user.id);
+  };
+  window.addEventListener('focus', handleFocus);
+  return () => window.removeEventListener('focus', handleFocus);
+}, [user]);
   const caricaCrediti = async (userId) => {
     const { data } = await supabase
       .from("user_translations")
