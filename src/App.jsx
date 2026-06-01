@@ -17,7 +17,7 @@ twice) 8 times, slm, k12, yo, sl3 wyif. 733 sts.`;
 const ESEMPIO_IT = `SEZIONE 7 - Bordo Ondulato
 Ferro 1 (DL): Usando MC, 3dir, gettato, 12dir, passare marcapunti, *(gettato due volte, 2assdir) 8 volte, gettato due volte, accav doppia, gettato due volte, (2assdir, gettato due volte) 8 volte, passare marcapunti, 1dir, passare marcapunti; ripetere da * altre 11 volte, (gettato due volte, 2assdir) 8 volte, gettato due volte, accav doppia, gettato due volte, (2assdir, gettato due volte) 8 volte, passare marcapunti, 12dir, gettato, passare 3 m con il filo davanti. 733 m.`;
 
-const OFFERTA_LANCIO = true; // Cambia a false per terminare l'offerta
+const OFFERTA_LANCIO = true;
 
 const PIANI = [
   {
@@ -86,14 +86,15 @@ export default function App() {
     });
     return () => subscription.unsubscribe();
   }, []);
-// Ricarica crediti quando la finestra torna in focus
-useEffect(() => {
-  const handleFocus = () => {
-    if (user) caricaCrediti(user.id);
-  };
-  window.addEventListener('focus', handleFocus);
-  return () => window.removeEventListener('focus', handleFocus);
-}, [user]);
+
+  useEffect(() => {
+    const handleFocus = () => {
+      if (user) caricaCrediti(user.id);
+    };
+    window.addEventListener('focus', handleFocus);
+    return () => window.removeEventListener('focus', handleFocus);
+  }, [user]);
+
   const caricaCrediti = async (userId) => {
     const { data } = await supabase
       .from("user_translations")
@@ -137,6 +138,15 @@ useEffect(() => {
       else { setConfirmMessage(true); setEmail(""); setPassword(""); setAcceptedTerms(false); }
     }
     setAuthLoading(false);
+  };
+
+  const resetPassword = async () => {
+    if (!email) { setAuthError("Inserisci la tua email prima di procedere."); return; }
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: 'https://knittranslate.com/reset-password',
+    });
+    if (error) setAuthError("Errore nell'invio. Riprova.");
+    else setAuthError("✓ Email inviata! Controlla la tua casella.");
   };
 
   const logout = async () => {
@@ -293,21 +303,21 @@ useEffect(() => {
                         </p>
                       </div>
                       <div style={{ textAlign: "right", flexShrink: 0, marginLeft: "1rem" }}>
-  {OFFERTA_LANCIO && (
-    <span style={{
-      fontSize: "0.8rem", color: "#94a3b8",
-      textDecoration: "line-through", display: "block"
-    }}>
-      {piano.prezzoOriginale}
-    </span>
-  )}
-  <span style={{
-    fontWeight: "800", fontSize: "1.15rem",
-    color: piano.highlight ? "#4f46e5" : "#16a34a"
-  }}>
-    {piano.prezzo}
-  </span>
-</div>
+                        {OFFERTA_LANCIO && (
+                          <span style={{
+                            fontSize: "0.8rem", color: "#94a3b8",
+                            textDecoration: "line-through", display: "block"
+                          }}>
+                            {piano.prezzoOriginale}
+                          </span>
+                        )}
+                        <span style={{
+                          fontWeight: "800", fontSize: "1.15rem",
+                          color: piano.highlight ? "#4f46e5" : "#16a34a"
+                        }}>
+                          {piano.prezzo}
+                        </span>
+                      </div>
                     </button>
                   ))}
                 </div>
@@ -386,11 +396,27 @@ useEffect(() => {
                       style={{
                         width: "100%", padding: "0.75rem", borderRadius: "0.75rem",
                         border: "1px solid #e2e8f0", fontSize: "0.9rem",
-                        marginBottom: "1rem", boxSizing: "border-box", outline: "none"
+                        marginBottom: "0.75rem", boxSizing: "border-box", outline: "none"
                       }}
                     />
+
+                    {/* LINK PASSWORD DIMENTICATA — solo in login */}
+                    {authMode === "login" && (
+                      <p style={{ textAlign: "right", fontSize: "0.78rem", marginBottom: "0.75rem" }}>
+                        <button onClick={resetPassword} style={{
+                          color: "#6366f1", background: "none", border: "none",
+                          cursor: "pointer", fontWeight: "600", fontSize: "0.78rem"
+                        }}>
+                          Hai dimenticato la password?
+                        </button>
+                      </p>
+                    )}
+
                     {authError && (
-                      <p style={{ color: "#ef4444", fontSize: "0.8rem", marginBottom: "0.75rem" }}>
+                      <p style={{
+                        color: authError.startsWith("✓") ? "#16a34a" : "#ef4444",
+                        fontSize: "0.8rem", marginBottom: "0.75rem"
+                      }}>
                         {authError}
                       </p>
                     )}
@@ -418,7 +444,8 @@ useEffect(() => {
                       style={{
                         width: "100%", padding: "0.875rem", borderRadius: "0.875rem",
                         background: "#4f46e5", color: "white", border: "none",
-                        fontSize: "0.95rem", fontWeight: "700", cursor: authLoading || (authMode === "signup" && !acceptedTerms) ? "not-allowed" : "pointer",
+                        fontSize: "0.95rem", fontWeight: "700",
+                        cursor: authLoading || (authMode === "signup" && !acceptedTerms) ? "not-allowed" : "pointer",
                         marginBottom: "1rem",
                         opacity: (authMode === "signup" && !acceptedTerms) ? 0.5 : 1,
                         transition: "opacity 0.2s ease"
@@ -441,20 +468,22 @@ useEffect(() => {
           </div>
         </div>
       )}
-{/* BANNER OFFERTA LANCIO */}
-{OFFERTA_LANCIO && (
-  <div style={{
-    background: "linear-gradient(135deg, #4f46e5, #7c3aed)",
-    color: "white",
-    textAlign: "center",
-    padding: "0.6rem 1rem",
-    fontSize: "0.82rem",
-    fontWeight: "600",
-    letterSpacing: "0.01em",
-  }}>
-    🎉 Offerta di Lancio — Prezzi speciali per i primi 3 giorni! Approfitta subito.
-  </div>
-)}
+
+      {/* BANNER OFFERTA LANCIO */}
+      {OFFERTA_LANCIO && (
+        <div style={{
+          background: "linear-gradient(135deg, #4f46e5, #7c3aed)",
+          color: "white",
+          textAlign: "center",
+          padding: "0.6rem 1rem",
+          fontSize: "0.82rem",
+          fontWeight: "600",
+          letterSpacing: "0.01em",
+        }}>
+          🎉 Offerta di Lancio — Prezzi speciali per i primi 3 giorni! Approfitta subito.
+        </div>
+      )}
+
       {/* HEADER */}
       <header className="header">
         <div className="header-content">
@@ -606,7 +635,6 @@ useEffect(() => {
             ) : "Traduci Modello →"}
           </button>
 
-          {/* DISCLAIMER NB — sparisce quando il bottone si accende */}
           {!inputAttivo && (
             <p style={{
               marginTop: "1rem",
@@ -620,7 +648,8 @@ useEffect(() => {
               textAlign: "center",
               lineHeight: 1.5,
             }}>
-💡 <strong>Suggerimento per non sprecare crediti:</strong> I PDF a volte si copiano a scatti. Per una traduzione perfetta, ti suggeriamo di preparare prima tutto il testo del modello su un documento (es. Note o Word) e incollarlo qui in un colpo solo.            </p>
+              💡 <strong>Suggerimento per non sprecare crediti:</strong> I PDF a volte si copiano a scatti. Per una traduzione perfetta, ti suggeriamo di preparare prima tutto il testo del modello su un documento (es. Note o Word) e incollarlo qui in un colpo solo.
+            </p>
           )}
 
           <p className="footer-note">
@@ -640,8 +669,9 @@ useEffect(() => {
           </p>
         </div>
       </main>
-     {/* FOOTER */}
-<footer style={{
+
+      {/* FOOTER */}
+      <footer style={{
         textAlign: "center",
         padding: "2rem 1rem",
         borderTop: "1px solid #e2e8f0",
