@@ -141,13 +141,14 @@ export default function App() {
   };
 
   const resetPassword = async () => {
-    if (!email) { setAuthError("Inserisci la tua email prima di procedere."); return; }
-    const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: 'https://knittranslate.com/reset-password',
-    });
-    if (error) setAuthError("Errore nell'invio. Riprova.");
-    else setAuthError("✓ Email inviata! Controlla la tua casella.");
-  };
+  const emailValue = email || document.querySelector('input[type="email"]')?.value;
+  if (!emailValue) { setAuthError("Inserisci la tua email prima di procedere."); return; }
+  const { error } = await supabase.auth.resetPasswordForEmail(emailValue, {
+    redirectTo: 'https://knittranslate.com/reset-password.html',
+  });
+  if (error) setAuthError("Errore nell'invio. Riprova.");
+  else setAuthError("✓ Email inviata! Controlla la tua casella.");
+};
 
   const logout = async () => {
     await supabase.auth.signOut();
