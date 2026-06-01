@@ -144,7 +144,7 @@ export default function App() {
   const emailValue = email || document.querySelector('input[type="email"]')?.value;
   if (!emailValue) { setAuthError("Inserisci la tua email prima di procedere."); return; }
   const { error } = await supabase.auth.resetPasswordForEmail(emailValue, {
-    redirectTo: 'https://knittranslate.com/reset-password.html',
+    redirectTo: 'https://www.knittranslate.com/reset-password.html',
   });
   if (error) setAuthError("Errore nell'invio. Riprova.");
   else setAuthError("✓ Email inviata! Controlla la tua casella.");
