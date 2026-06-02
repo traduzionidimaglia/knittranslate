@@ -120,6 +120,8 @@ Azioni:
 - cdd -> accavallata doppia centrale
 - Sssk -> pppd (PRIMA OCCORRENZA: pppd (passa 1m, passa 1m, passa 1m, lavorare le 3 m assieme a diritto ritorto). Poi solo pppd)
 - backstitch -> punto indietro
+- pick up -> riprendere (MAI raccogliere)
+- pick up and knit -> riprendere le maglie e lavorarle a diritto
 - w&t -> avvolgere e girare
 
 Sezioni:
@@ -208,6 +210,8 @@ Azioni:
 - bind off / bo -> cerrar (los puntos)
 - weave in ends -> rematar los cabos
 - block / blocking -> bloquear / vaporizar
+- pick up -> levantar puntos (MAI recoger)
+- pick up and knit -> levantar y tejer los puntos
 - Finishing -> Confección y remate
 - join -> unir
 - tail -> cabo de hilo
