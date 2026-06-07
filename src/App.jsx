@@ -17,15 +17,15 @@ twice) 8 times, slm, k12, yo, sl3 wyif. 733 sts.`;
 const ESEMPIO_IT = `SEZIONE 7 - Bordo Ondulato
 Ferro 1 (DL): Usando MC, 3dir, gettato, 12dir, passare marcapunti, *(gettato due volte, 2assdir) 8 volte, gettato due volte, accav doppia, gettato due volte, (2assdir, gettato due volte) 8 volte, passare marcapunti, 1dir, passare marcapunti; ripetere da * altre 11 volte, (gettato due volte, 2assdir) 8 volte, gettato due volte, accav doppia, gettato due volte, (2assdir, gettato due volte) 8 volte, passare marcapunti, 12dir, gettato, passare 3 m con il filo davanti. 733 m.`;
 
-const OFFERTA_LANCIO = true;
+const OFFERTA_LANCIO = false;
 
 const PIANI = [
   {
     id: "single",
     nome: "Singolo",
-    prezzo: OFFERTA_LANCIO ? "€2,99" : "€4,50",
+    prezzo: "€4,50",
     prezzoOriginale: "€4,50",
-    prezzoUnitario: OFFERTA_LANCIO ? "€2,99 / pattern" : "€4,50 / pattern",
+    prezzoUnitario: "€4,50 / pattern",
     crediti: 1,
     descrizione: "1 pattern tradotto",
     highlight: false,
@@ -33,23 +33,23 @@ const PIANI = [
   {
     id: "pack3",
     nome: "Pacchetto 3",
-    prezzo: OFFERTA_LANCIO ? "€6,99" : "€11,49",
+    prezzo: "€11,49",
     prezzoOriginale: "€11,49",
-    prezzoUnitario: OFFERTA_LANCIO ? "€2,33 / pattern" : "€3,83 / pattern",
+    prezzoUnitario: "€3,83 / pattern",
     crediti: 3,
     descrizione: "3 pattern tradotti",
-    risparmio: OFFERTA_LANCIO ? "Risparmi €4,50" : "Risparmi €2,01",
+    risparmio: "Risparmi €2,01",
     highlight: true,
   },
   {
     id: "pack10",
     nome: "Pacchetto 10",
-    prezzo: OFFERTA_LANCIO ? "€19,90" : "€29,90",
+    prezzo: "€29,90",
     prezzoOriginale: "€29,90",
-    prezzoUnitario: OFFERTA_LANCIO ? "€1,99 / pattern" : "€2,99 / pattern",
+    prezzoUnitario: "€2,99 / pattern",
     crediti: 10,
     descrizione: "10 pattern tradotti",
-    risparmio: OFFERTA_LANCIO ? "Risparmi €10,00" : "Risparmi €15,10",
+    risparmio: "Risparmi €15,10",
     highlight: false,
   },
 ];
@@ -141,14 +141,14 @@ export default function App() {
   };
 
   const resetPassword = async () => {
-  const emailValue = email || document.querySelector('input[type="email"]')?.value;
-  if (!emailValue) { setAuthError("Inserisci la tua email prima di procedere."); return; }
-  const { error } = await supabase.auth.resetPasswordForEmail(emailValue, {
-    redirectTo: 'https://www.knittranslate.com/reset-password.html',
-  });
-  if (error) setAuthError("Errore nell'invio. Riprova.");
-  else setAuthError("✓ Email inviata! Controlla la tua casella.");
-};
+    const emailValue = email || document.querySelector('input[type="email"]')?.value;
+    if (!emailValue) { setAuthError("Inserisci la tua email prima di procedere."); return; }
+    const { error } = await supabase.auth.resetPasswordForEmail(emailValue, {
+      redirectTo: 'https://www.knittranslate.com/reset-password.html',
+    });
+    if (error) setAuthError("Errore nell'invio. Riprova.");
+    else setAuthError("✓ Email inviata! Controlla la tua casella.");
+  };
 
   const logout = async () => {
     await supabase.auth.signOut();
@@ -304,14 +304,6 @@ export default function App() {
                         </p>
                       </div>
                       <div style={{ textAlign: "right", flexShrink: 0, marginLeft: "1rem" }}>
-                        {OFFERTA_LANCIO && (
-                          <span style={{
-                            fontSize: "0.8rem", color: "#94a3b8",
-                            textDecoration: "line-through", display: "block"
-                          }}>
-                            {piano.prezzoOriginale}
-                          </span>
-                        )}
                         <span style={{
                           fontWeight: "800", fontSize: "1.15rem",
                           color: piano.highlight ? "#4f46e5" : "#16a34a"
@@ -401,7 +393,6 @@ export default function App() {
                       }}
                     />
 
-                    {/* LINK PASSWORD DIMENTICATA — solo in login */}
                     {authMode === "login" && (
                       <p style={{ textAlign: "right", fontSize: "0.78rem", marginBottom: "0.75rem" }}>
                         <button onClick={resetPassword} style={{
@@ -422,7 +413,6 @@ export default function App() {
                       </p>
                     )}
 
-                    {/* CHECKBOX TERMINI — solo in registrazione */}
                     {authMode === "signup" && (
                       <label style={{
                         display: "flex", alignItems: "flex-start", gap: "0.5rem",
@@ -470,21 +460,6 @@ export default function App() {
         </div>
       )}
 
-      {/* BANNER OFFERTA LANCIO */}
-      {OFFERTA_LANCIO && (
-        <div style={{
-          background: "linear-gradient(135deg, #4f46e5, #7c3aed)",
-          color: "white",
-          textAlign: "center",
-          padding: "0.6rem 1rem",
-          fontSize: "0.82rem",
-          fontWeight: "600",
-          letterSpacing: "0.01em",
-        }}>
-          🎉 Offerta di Lancio — Prezzi speciali per i primi 3 giorni! Approfitta subito.
-        </div>
-      )}
-
       {/* HEADER */}
       <header className="header">
         <div className="header-content">
@@ -492,7 +467,6 @@ export default function App() {
             <span className="logo-icon">🧶</span>
             <h1>KnitTranslate</h1>
           </div>
-          {/* DESKTOP: tutto su una riga */}
           <div className="header-desktop">
             {user && (
               <>
@@ -520,7 +494,6 @@ export default function App() {
               }}>Accedi</button>
             )}
           </div>
-          {/* MOBILE: due righe */}
           <div className="header-mobile">
             {!user && (
               <button onClick={() => { setAuthMode("login"); setModalStep("auth"); setShowModal(true); }} style={{
@@ -555,18 +528,12 @@ export default function App() {
       {/* MAIN */}
       <main className="main-content">
 
-        {/* HERO TITLE */}
         <div style={{ textAlign: "center", padding: "2rem 1rem 0.5rem" }}>
           <h2 style={{
-            fontSize: "1.75rem",
-            fontWeight: "700",
-            color: "#1e293b",
-            letterSpacing: "-0.02em",
-            margin: 0,
-            fontFamily: "Inter, sans-serif",
+            fontSize: "1.75rem", fontWeight: "700", color: "#1e293b",
+            letterSpacing: "-0.02em", margin: 0, fontFamily: "Inter, sans-serif",
             background: "linear-gradient(135deg, #4f46e5, #7c3aed)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
+            WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
           }}>
             Traduzione Professionale di Modelli di Maglia
           </h2>
@@ -638,16 +605,10 @@ export default function App() {
 
           {!inputAttivo && (
             <p style={{
-              marginTop: "1rem",
-              fontSize: "0.78rem",
-              color: "#92400e",
-              background: "#fff7ed",
-              border: "1px solid #fed7aa",
-              borderRadius: "0.75rem",
-              padding: "0.6rem 1rem",
-              maxWidth: "520px",
-              textAlign: "center",
-              lineHeight: 1.5,
+              marginTop: "1rem", fontSize: "0.78rem", color: "#92400e",
+              background: "#fff7ed", border: "1px solid #fed7aa",
+              borderRadius: "0.75rem", padding: "0.6rem 1rem",
+              maxWidth: "520px", textAlign: "center", lineHeight: 1.5,
             }}>
               💡 <strong>Suggerimento per non sprecare crediti:</strong> I PDF a volte si copiano a scatti. Per una traduzione perfetta, ti suggeriamo di preparare prima tutto il testo del modello su un documento (es. Note o Word) e incollarlo qui in un colpo solo.
             </p>
@@ -658,13 +619,8 @@ export default function App() {
           </p>
 
           <p style={{
-            marginTop: "1.5rem",
-            fontSize: "0.7rem",
-            color: "#94a3b8",
-            textAlign: "center",
-            lineHeight: 1.6,
-            maxWidth: "600px",
-            margin: "1.5rem auto 0",
+            marginTop: "1.5rem", fontSize: "0.7rem", color: "#94a3b8",
+            textAlign: "center", lineHeight: 1.6, maxWidth: "600px", margin: "1.5rem auto 0",
           }}>
             KnitTranslate è uno strumento di traduzione assistita. I pattern di maglia rimangono di proprietà esclusiva dei rispettivi autori e designer. L'utente è responsabile del rispetto dei diritti d'autore relativi ai testi caricati. KnitTranslate declina ogni responsabilità per usi non conformi alla normativa vigente.
           </p>
@@ -673,12 +629,9 @@ export default function App() {
 
       {/* FOOTER */}
       <footer style={{
-        textAlign: "center",
-        padding: "2rem 1rem",
-        borderTop: "1px solid #e2e8f0",
-        marginTop: "2rem",
-        fontSize: "0.75rem",
-        color: "#94a3b8",
+        textAlign: "center", padding: "2rem 1rem",
+        borderTop: "1px solid #e2e8f0", marginTop: "2rem",
+        fontSize: "0.75rem", color: "#94a3b8",
       }}>
         <a href="/termini.html" target="_blank" rel="noopener noreferrer" style={{ color: "#6366f1", textDecoration: "none", fontWeight: "600" }}>Termini di Servizio</a>
         <span style={{ margin: "0 0.5rem" }}>·</span>
